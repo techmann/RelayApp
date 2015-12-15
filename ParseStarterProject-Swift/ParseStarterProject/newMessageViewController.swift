@@ -17,19 +17,21 @@ class newMessageViewController: UIViewController, UITextFieldDelegate {
     @IBAction func chooseContactsButtonPressed(sender: AnyObject) {
     
     if let messageText = messageTextInput.text {
-        let newMessage = PFObject(className: "newMessage")
-        newMessage["messageText"] = messageText
-        newMessage.saveInBackgroundWithBlock {
+        
+        let relay = PFObject(className: "relay")
+        relay["comment"] = messageText
+        relay["sender"] = PFUser.currentUser()
+        relay.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
+            
             if (success) {
                 // The object has been saved.
             } else {
                 // There was a problem, check error.description
             }
         }
-        }
+      }
     }
-        
 
     override func viewDidLoad() {
         super.viewDidLoad()

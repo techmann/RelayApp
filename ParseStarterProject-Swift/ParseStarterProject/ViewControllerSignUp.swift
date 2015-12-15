@@ -68,6 +68,8 @@ class ViewControllerSignUp: UIViewController, UITextFieldDelegate {
                     
                     //signup successful
                     
+                    
+                    
                 } else {
                         
                         if let errorString = error!.userInfo["error"] as? String {

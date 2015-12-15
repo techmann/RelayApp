@@ -10,9 +10,6 @@
 import UIKit
 import Parse
 
-// If you want to use any of the UI components, uncomment this line
-// import ParseUI
-
 // If you want to use Crash Reporting - uncomment this line
 // import ParseCrashReporting
 
@@ -51,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultACL = PFACL();
 
         // If you would like all objects to be private by default, remove this line.
-        defaultACL.setPublicReadAccess(true)
+        //defaultACL.setPublicReadAccess(true)
 
         PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
 
