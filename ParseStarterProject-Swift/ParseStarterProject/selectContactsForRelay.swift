@@ -15,8 +15,32 @@ class selectContactsForRelay: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // stores all the users that match the current search query
-    var friends: [PFUser]?
+    var users: [PFUser]?
     
+    let collation = UILocalizedIndexedCollation.currentCollation() as UILocalizedIndexedCollation
+    //var sections: [[AnyObject]] = []
+    
+    
+    /* type to represent table items
+    `section` stores a `UITableView` section */
+    class User: NSObject {
+        let name: String
+        var section: Int?
+        
+        init(name: String) {
+            self.name = name
+        }
+    }
+    
+    // custom type to represent table sections
+    class Section {
+        var users2: [PFUser] = []
+        
+        func addUser(user: PFUser) {
+            self.users2.append(user)
+        }
+    }
+        
     /*
     This is a local cache. It stores all the users this user is following.
     It is used to update the UI immediately upon user interaction, instead of waiting
@@ -31,6 +55,7 @@ class selectContactsForRelay: UIViewController {
             collectionView.reloadData()
         }
     }
+
     
     // the current parse query
     var query: PFQuery? {
@@ -39,13 +64,13 @@ class selectContactsForRelay: UIViewController {
             oldValue?.cancel()
         }
     }
-    
+
     /**
     Is called as the completion block of all queries.
     As soon as a query completes, this method updates the Table View.
     */
     func updateList(results: [PFObject]?, error: NSError?) {
-        self.friends = results as? [PFUser] ?? []
+        self.users = results as? [PFUser] ?? []
         self.collectionView.reloadData()
         
     }
@@ -64,6 +89,45 @@ class selectContactsForRelay: UIViewController {
             }
         }
     }
+
+/*
+    // table sections
+    var sections: [Section] {
+        // return if already initialized
+        if self._sections != nil {
+            return self._sections!
+        }
+        
+        // create users from the name list
+        var users3: [User] = users.map { name in
+            var user = User(name: name)
+            user.section = self.collation.sectionForObject(user, collationStringSelector: "name")
+            return user
+        }!
+        
+        // create empty sections
+        var sections = [Section]()
+        for i in 0..<self.collation.sectionIndexTitles.count {
+            sections.append(Section())
+        }
+        
+        // put each user in a section
+        for user in users {
+            sections[user.section!].addUser(user)
+        }
+        
+        // sort each section
+        for section in sections {
+            section.users = self.collation.sortedArrayFromArray(section.users, collationStringSelector: "name") as [User]
+        }
+        
+        self._sections = sections
+        
+        return self._sections!
+        
+    }
+    var _sections: [Section]?
+*/
     
 
     
@@ -84,6 +148,8 @@ class selectContactsForRelay: UIViewController {
                     $0.objectForKey(ParseHelper.ParseFollowToUser) as! PFUser}
             }
         }
+        
+        print(users)
     }
     
     override func viewDidLoad() {
@@ -101,7 +167,7 @@ extension selectContactsForRelay: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! selectContactsForRelayCell
         
-        let friend = friends![indexPath.row]
+        let friend = users![indexPath.row]
         cell.user = friend
         
         cell.layer.cornerRadius = 34
@@ -113,8 +179,19 @@ extension selectContactsForRelay: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
-        return self.friends?.count ?? 0
+        return self.users?.count ?? 0
+    }
     
+    func collectionView(collectionView: UICollectionView, titleForHeaderInSection section: Int) -> String {
+        return collation.sectionTitles[section]
+    }
+    
+    func sectionIndexTitlesForCollectionView(collectionView: UICollectionView) -> [String] {
+        return collation.sectionIndexTitles
+    }
+    
+    func collectionView(collectionView: UICollectionView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return collation.sectionForSectionIndexTitleAtIndex(index)
     }
 
 }

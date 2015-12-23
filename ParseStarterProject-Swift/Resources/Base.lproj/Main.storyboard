@@ -389,8 +389,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SIz-m4-CzZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PS5-E0-AhT">
+                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.2666666667" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Relay">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" misplaced="YES" bounces="NO" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SIz-m4-CzZ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="ygU-Ya-9rt">
@@ -428,24 +435,17 @@
                                     <outlet property="delegate" destination="YGs-s9-QNP" id="mBT-TF-DJG"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PS5-E0-AhT">
-                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
-                                <color key="backgroundColor" red="0.1176470588" green="0.2666666667" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Relay">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="woN-ua-KdT" firstAttribute="top" secondItem="PS5-E0-AhT" secondAttribute="bottom" id="27j-O0-b7g"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="SIz-m4-CzZ" secondAttribute="trailing" constant="-20" id="4sn-1b-uSh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SIz-m4-CzZ" secondAttribute="trailing" id="4sn-1b-uSh"/>
                             <constraint firstItem="SIz-m4-CzZ" firstAttribute="centerX" secondItem="gUi-Gs-sJz" secondAttribute="centerX" id="WSL-jU-gn7"/>
                             <constraint firstItem="PS5-E0-AhT" firstAttribute="centerX" secondItem="gUi-Gs-sJz" secondAttribute="centerX" id="X3s-Ex-Gwd"/>
                             <constraint firstItem="SIz-m4-CzZ" firstAttribute="top" secondItem="53u-K1-cDL" secondAttribute="bottom" id="ccQ-g8-fv0"/>
                             <constraint firstItem="PS5-E0-AhT" firstAttribute="leading" secondItem="gUi-Gs-sJz" secondAttribute="leadingMargin" constant="-20" id="ihN-ne-JGS"/>
                             <constraint firstItem="PS5-E0-AhT" firstAttribute="top" secondItem="SIz-m4-CzZ" secondAttribute="bottom" id="rDy-yw-aid"/>
-                            <constraint firstItem="SIz-m4-CzZ" firstAttribute="leading" secondItem="gUi-Gs-sJz" secondAttribute="leadingMargin" constant="-20" id="teB-2K-Zvy"/>
+                            <constraint firstItem="SIz-m4-CzZ" firstAttribute="leading" secondItem="gUi-Gs-sJz" secondAttribute="leadingMargin" id="teB-2K-Zvy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PS5-E0-AhT" secondAttribute="trailing" constant="-20" id="yY1-O8-rny"/>
                         </constraints>
                     </view>
