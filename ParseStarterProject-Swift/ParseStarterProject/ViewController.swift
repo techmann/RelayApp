@@ -9,26 +9,35 @@
 
 import UIKit
 import Parse
+import ParseUI
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
+    
+    var logInController: PFLogInViewController! = PFLogInViewController()
+    var signUpController: PFSignUpViewController! = PFSignUpViewController()
     
     
-    @IBOutlet weak var signUp: UIButton!
-    
-    
-    @IBAction func signUpPressed(sender: UIButton) {
+    @IBAction func logInBtn(sender: AnyObject) {
+        
+        self.logInController.fields = (PFLogInFields([.UsernameAndPassword, .LogInButton, .DismissButton, .Facebook, .SignUpButton]))
+        let logInTitle = UILabel()
+        logInTitle.text = "Relay"
+        self.logInController.logInView!.logo = logInTitle
+        self.logInController.delegate = self
+        self.presentViewController(self.logInController, animated: false, completion: nil)
         
     }
     
-    //go to inbox if logged in
-    override func viewDidAppear(animated: Bool) {
+    
+    
+    @IBAction func signUpBtn(sender: AnyObject) {
         
-        if PFUser.currentUser()?.username != nil {
-            
-            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-            
-        }
-        
+        self.signUpController.fields = (PFSignUpFields([.UsernameAndPassword, .SignUpButton, .DismissButton, .Email, .Additional]))
+        let SignUpLogoTitle = UILabel()
+        SignUpLogoTitle.text = "Relay"
+        self.signUpController.signUpView!.logo = SignUpLogoTitle
+        self.signUpController.delegate = self
+        self.presentViewController(self.signUpController, animated: false, completion: nil)
     }
     
 
@@ -36,17 +45,73 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //self.navigationController!.navigationBar.hidden = true
-        
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
-        self.navigationController!.navigationBar.translucent = true
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func logInViewController(logInController: PFLogInViewController, shouldBeginLogInWithUsername username: String, password: String) -> Bool {
+        
+        if (!username.isEmpty || !password.isEmpty) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        
+        //self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
+        print("failed to log in")
+    }
+    
+    func logInViewControllerDidCancelLogIn(logInController: PFLogInViewController) {
+        
+    }
+    
+    func presentLoggedInAlert() {
+        let alertController = UIAlertController(title: "Login Error", message: "Incorrect Username/Password Combination", preferredStyle: .Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(OKAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+        
+        //let additionalInformation: String = signUpController.signUpView!.additionalField!.text!
+        user["fullName"] = signUpController.signUpView!.additionalField!.text!
+        
+        if user["authData"] != nil {
+            
+        }
+        
+        user.saveInBackground()
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func signUpViewController(signUpController: PFSignUpViewController, didFailToSignUpWithError error: NSError?) {
+        
+        print("Failed to sign up...")
+        
+    }
+    
+    
+    func signUpViewControllerDidCancelSignUp(signUpController: PFSignUpViewController) {
+        
+        print("User dismissed sign up.")
+        
+    }
+
     
 }

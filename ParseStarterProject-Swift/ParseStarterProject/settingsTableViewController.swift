@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+var currentUser = PFUser()
+
 class settingsTableViewController: UITableViewController {
 
     
@@ -76,19 +78,24 @@ class settingsTableViewController: UITableViewController {
             
             PFUser.logOut() //logout user
             
-            let currentUser = PFUser.currentUser()?.username // this will now be nil
+            currentUser = PFUser.currentUser()!
             
-            if currentUser == nil {
-            
-                let signInVC = self.storyboard?.instantiateViewControllerWithIdentifier("signInNC")
-            
-                self.presentViewController(signInVC!, animated: true, completion: nil)
-                
+            let completionHandler:()->Void = {
+                let settingsNC = self.navigationController as? SettingsNavigationControllerViewController
+                settingsNC?.tableViewController?.presentParse()
             }
             
+            self.presentingViewController!.dismissViewControllerAnimated(true, completion: completionHandler) //completionhandler
+            
+//            let currentUser = PFUser.currentUser()?.username // this will now be nil
 
+//            if currentUser == nil {
+//            
+//                let inboxVC = self.storyboard?.instantiateViewControllerWithIdentifier("signInNC")
+//            
+//                self.presentViewController(inboxVC!, animated: true, completion: nil)
+//            }
         }
-        
     }
     
     

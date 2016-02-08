@@ -30,9 +30,9 @@ class ParseHelper {
         let query = PFQuery(className: "friends")
         query.whereKey("fromUser", equalTo:user)
         query.findObjectsInBackgroundWithBlock(completionBlock)
-        
     }
     
+        
     /**
     Establishes a follow relationship between two users.
     

@@ -90,9 +90,9 @@ class ViewControllerUsernameTest: UIViewController {
             // use map to extract the User from a Follow object
             self.followingUsers = relations.map {
                 $0.objectForKey(ParseHelper.ParseFollowToUser) as! PFUser}
+            }
         }
     }
-}
 
 //end of VC
 }

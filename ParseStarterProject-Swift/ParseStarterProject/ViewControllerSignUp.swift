@@ -16,6 +16,8 @@ class ViewControllerSignUp: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
     
     var theText: NSString!
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -56,6 +58,9 @@ class ViewControllerSignUp: UIViewController, UITextFieldDelegate {
             user.username = usernameTextfield.text
             user.password = passwordTextfield.text
             user.email = emailTextfield.text
+            user["firstName"] = self.firstName.text
+            user["lastName"] = self.lastName.text
+            
             
             var errorMessage  = "Please try again later"
             
@@ -65,29 +70,21 @@ class ViewControllerSignUp: UIViewController, UITextFieldDelegate {
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
                 
                 if error == nil {
-                    
-                    //signup successful
-                    
-                    
-                    
+                
+                self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                
+
                 } else {
                         
                         if let errorString = error!.userInfo["error"] as? String {
-                        
                         errorMessage = errorString
-                        
                     }
-                    
-                    self.displayAlert("Failed SignUp", message: errorMessage)
-                    
-                }
                 
+                    self.displayAlert("Failed SignUp", message: errorMessage)
+                }
             })
-            
         }
-        
     }
-    
     
     
     override func viewDidLoad() {

@@ -19,5 +19,4 @@ class selectContactsForRelayCell: PFCollectionViewCell {
             friendLabel.text = user?.username
         }
     }
-
 }

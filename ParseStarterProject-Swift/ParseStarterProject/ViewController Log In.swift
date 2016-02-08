@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+
 @available(iOS 8.0, *)
 class ViewController_Log_In: UIViewController, UITextFieldDelegate {
     
@@ -16,7 +17,6 @@ class ViewController_Log_In: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameLogin: UITextField!
     @IBOutlet weak var emailAddressLogin: UITextField!
     @IBOutlet weak var passwordLogin: UITextField!
-    
     
     var currentUser = PFUser.currentUser()
     
@@ -28,37 +28,31 @@ class ViewController_Log_In: UIViewController, UITextFieldDelegate {
         
         var errorMessage = ""
         
-        
                 if usernameLogin.text != nil {
                     
                     PFUser.logInWithUsernameInBackground(usernameLogin.text!, password: passwordLogin.text!, block: { (user, error) -> Void in
                         
                         if user != nil {
-                            
                             //logged in
-
-                            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                             
-                        
+                            self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                            
                         } else {
                             
                             let errorString = error!.userInfo["error"] as? String
-                                
                                 errorMessage = errorString!
                             
                             let alert = UIAlertController(title: "Login Error", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
                             
                             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                            
                             self.presentViewController(alert, animated: true, completion: nil)
-                            
                         }
-                        
                     })
                     
                 }
             //end LogInButtonPressed
             }
+    
     
 
     override func viewDidLoad() {

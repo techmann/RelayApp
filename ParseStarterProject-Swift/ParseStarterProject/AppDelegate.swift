@@ -9,6 +9,8 @@
 
 import UIKit
 import Parse
+import FBSDKCoreKit
+import ParseFacebookUtilsV4
 
 // If you want to use Crash Reporting - uncomment this line
 // import ParseCrashReporting
@@ -33,24 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         // Uncomment and fill in with your Parse credentials:
         
-        Parse.setApplicationId("MDNc4aZDOeGdZVBYiLldEGqQgK0e3eb9EBxzsZgD",
-            clientKey: "qfmM73I2W0B7EGl0umI4APuSAE9cSMtQLosoNtIA")
+        //Parse.setApplicationId("MDNc4aZDOeGdZVBYiLldEGqQgK0e3eb9EBxzsZgD",
+        //clientKey: "qfmM73I2W0B7EGl0umI4APuSAE9cSMtQLosoNtIA")
+            Parse.setApplicationId("MDNc4aZDOeGdZVBYiLldEGqQgK0e3eb9EBxzsZgD", clientKey:"qfmM73I2W0B7EGl0umI4APuSAE9cSMtQLosoNtIA")
+            
+            PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
-        //
-        // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
-        // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
-        // Uncomment the line inside ParseStartProject-Bridging-Header and the following line here:
-        // PFFacebookUtils.initializeFacebook()
-        // ****************************************************************************
-
         PFUser.enableAutomaticUser()
-
-        let defaultACL = PFACL();
+        
+        //let defaultACL = PFACL();
 
         // If you would like all objects to be private by default, remove this line.
         //defaultACL.setPublicReadAccess(true)
 
-        PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
+        //PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
 
         if application.applicationState != UIApplicationState.Background {
             // Track an app open here if we launch with a push, unless
@@ -66,7 +64,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
+            }
+        
+            return true
         }
+
+        func application(application: UIApplication,
+            openURL url: NSURL,
+            sourceApplication: String?,
+            annotation: AnyObject) -> Bool {
+                
+        return FBSDKApplicationDelegate.sharedInstance().application(application,
+            openURL: url,
+            sourceApplication: sourceApplication,
+            annotation: annotation)
+        }
+        
+    
+        //Make sure it isn't already declared in the app delegate (possible redefinition of func error)
+        func applicationDidBecomeActive(application: UIApplication) {
+            FBSDKAppEvents.activateApp()
+        }
+
 
         //
         //  Swift 1.2
@@ -94,8 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //            application.registerForRemoteNotificationTypes(types)
         //        }
 
-        return true
-    }
 
     //--------------------------------------
     // MARK: Push Notifications
@@ -146,7 +163,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ///////////////////////////////////////////////////////////
     // Uncomment this method if you are using Facebook
     ///////////////////////////////////////////////////////////
-    // func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-    //     return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
-    // }
+    //func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    //    return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
+    //}
+
 }
+
+
+
+
+
