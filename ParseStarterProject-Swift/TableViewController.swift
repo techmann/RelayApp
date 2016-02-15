@@ -11,7 +11,10 @@ import Parse
 import ParseUI
 import FBSDKLoginKit
 import FBSDKCoreKit
+import ParseFacebookUtilsV4
+import FBSDKShareKit
 
+//var currentUser = PFUser()
 
 class TableViewController: PFQueryTableViewController {
     
@@ -21,13 +24,13 @@ class TableViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if PFUser.currentUser() == nil {
-            presentParse()
+            if PFUser.currentUser() == nil {
+                presentParse()
         }
 
-        self.addRightNavItemOnView()
-        self.addLeftNavItemOnView()
-        self.title = "Inbox"
+            self.addRightNavItemOnView()
+            self.addLeftNavItemOnView()
+            self.title = "Inbox"
         
         }
     
@@ -53,23 +56,48 @@ class TableViewController: PFQueryTableViewController {
             
             cell.comment?.text = object?.objectForKey("comment") as? String
             cell.sender?.text = object?.objectForKey("senderUsername") as? String
+            cell.cellProfilePic.image = UIImage(named: "placeholder")
             
-            let icon = object?.objectForKey("pasteStr") as! String
             
-            let URL = NSURL(string: icon)
-            let path = URL!.pathExtension
+            let senderProfile = object?.objectForKey("sender")
+            let senderId = (senderProfile?.objectId)! as String
+            let query = PFUser.query()
+            query?.whereKey("objectId", equalTo: senderId)
+            query!.findObjectsInBackgroundWithBlock {
+                (objects: [PFObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    if let objects = objects {
+                        for object in objects {
+                            if let profilePic = object.valueForKey("profilePic") as? PFFile {
+                            cell.cellProfilePic.file = profilePic
+                            cell.cellProfilePic.loadInBackground()
+                            } else {
+                                cell.cellProfilePic.image = UIImage(named: "profile.png")
+                            }
+                        }
+                    }
+                }
+            }
             
-            if path == "gif" {
+            let iconString = object?.objectForKey("pasteStr") as! String
+            
+            if iconString != "" {
+            
+                let URL = NSURL(string: iconString)
+                let path = URL!.pathExtension
                 
-                cell.inboxIcon?.image = UIImage(named: "gif.png")!
-                
-            } else if path == "jpg" || path == "png" || path == "jpg" || path == "tif" || path == "bmp" || path == "jpeg" {
-                
-                cell.inboxIcon?.image = UIImage(named: "photo.png")!
+                if path == "gif" {
+                    cell.inboxIcon?.image = UIImage(named: "gif.png")!
+                    
+                } else if path == "jpg" || path == "png" || path == "jpg" || path == "tif" || path == "bmp" || path == "jpeg" {
+                    cell.inboxIcon?.image = UIImage(named: "photo.png")!
+                    
+                } else {
+                    cell.inboxIcon?.image = UIImage(named: "url.png")!
+                }
                 
             } else {
-                
-                cell.inboxIcon?.image = UIImage(named: "url.png")!
+                cell.inboxIcon?.image = UIImage(named: "photo.png")!
             }
             
             return cell
@@ -86,11 +114,35 @@ class TableViewController: PFQueryTableViewController {
             return height
         }
     
-    func inboxIconCheck() {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        if indexPath.row + 1 > self.objects?.count {
+            self.loadNextPage()
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+        
+        else {
+            
+            self.performSegueWithIdentifier("showRelay", sender: self)
+        }
         
     }
-
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showRelay" {
+            
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let relayVC = segue.destinationViewController as! relayContentViewController
+            
+            let object = self.objectAtIndexPath(indexPath)
+            relayVC.pasteStr = object?.objectForKey("pasteStr") as! String
+            relayVC.imageFile = object?.objectForKey("relayPic") as! PFFile
+            
+            self.tableView.deselectRowAtIndexPath(indexPath!, animated: true)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -199,7 +251,34 @@ extension TableViewController: PFLogInViewControllerDelegate, PFSignUpViewContro
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         
-        currentUser = PFUser.currentUser()!
+        //currentUser = PFUser.currentUser()!
+        
+        let isLinkedToFacebook: Bool = PFFacebookUtils.isLinkedWithUser(PFUser.currentUser()!)
+        if isLinkedToFacebook == true {
+            
+            let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"])
+            graphRequest.startWithCompletionHandler( {
+                (connection, result, error) -> Void in
+                if error != nil {
+                    print(error)
+                    
+                } else if let result = result {
+
+                    user["fullName"] = result["name"]
+                    //user["email"] = result["email"]
+                    let userID = result["id"] as! String
+                    let imgURLString = "https://graph.facebook.com/" + userID + "/picture?type=large" //type=normal
+                    let imgURL = NSURL(string: imgURLString)
+                    let imageData = NSData(contentsOfURL: imgURL!)
+                    let objectID = PFUser.currentUser()?.objectId
+                    let name = result["name"] as! String
+                    user["username"] = name + " " + objectID!
+                    let imageFile: PFFile = PFFile(data: imageData!)!
+                    user["profilePic"] = imageFile
+                    user.saveInBackground()
+                }
+            })
+        }
         
         let completionHandler:()->Void = {
             self.loadObjects()
@@ -227,24 +306,7 @@ extension TableViewController: PFLogInViewControllerDelegate, PFSignUpViewContro
     
     func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
         
-        //let additionalInformation: String = signUpController.signUpView!.additionalField!.text!
         user["fullName"] = signUpController.signUpView!.additionalField!.text!
-        
-        if user["authData"] != nil {
-            
-        }
-            
-        if (fid != "") {
-            var imgURLString = "http://graph.facebook.com/" + fid! + "/picture?type=large" //type=normal
-        var imgURL = NSURL(string: imgURLString)
-        var imageData = NSData(contentsOfURL: imgURL!)
-        var image = UIImage(data: imageData!)
-        return image
-            }
-        }
-            return nil
-        }
-
         
         user.saveInBackground()
         

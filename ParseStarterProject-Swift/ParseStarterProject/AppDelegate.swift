@@ -40,8 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Parse.setApplicationId("MDNc4aZDOeGdZVBYiLldEGqQgK0e3eb9EBxzsZgD", clientKey:"qfmM73I2W0B7EGl0umI4APuSAE9cSMtQLosoNtIA")
             
             PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+            PFUser.enableRevocableSessionInBackground()
         
-        PFUser.enableAutomaticUser()
+        //PFUser.enableAutomaticUser()
         
         //let defaultACL = PFACL();
 

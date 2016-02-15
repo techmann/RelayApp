@@ -24,15 +24,18 @@ class selectContactsForRelay: UIViewController {
             
             let relay = PFObject(className: "relay")
             
-            relay["sender"] = currentUser
-            relay["senderUsername"] = currentUser.username!
+            relay["sender"] = PFUser.currentUser()
+            relay["senderUsername"] = PFUser.currentUser()!.username
             relay["recipient"] = object
             relay["comment"] = relayText
             relay["pasteStr"] = relayContent
             
+            if relayImageData != nil {
+                relay["relayPic"] = PFFile(name:"image.png", data:relayImageData!)
+            }
+
             relay.saveInBackground()
         }
-        
         
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -66,7 +69,7 @@ class selectContactsForRelay: UIViewController {
         }
     }
     
-        
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

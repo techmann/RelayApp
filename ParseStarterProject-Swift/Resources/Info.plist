@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb1737321213170145</string>
+				<string>fbauth2</string>
 			</array>
 		</dict>
 	</array>
@@ -39,6 +40,7 @@
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
+		<string>fb</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

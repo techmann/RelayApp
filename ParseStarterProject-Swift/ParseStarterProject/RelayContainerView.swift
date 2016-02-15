@@ -9,7 +9,9 @@
 import UIKit
 
 class RelayContainerView: UIView {
-
     
+    
+
+    //let username = currentUser["username"] as? String
 
 }

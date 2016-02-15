@@ -9,8 +9,6 @@
 import UIKit
 import Parse
 
-var currentUser = PFUser()
-
 class settingsTableViewController: UITableViewController {
 
     
@@ -78,7 +76,7 @@ class settingsTableViewController: UITableViewController {
             
             PFUser.logOut() //logout user
             
-            currentUser = PFUser.currentUser()!
+            //currentUser = PFUser.currentUser()!
             
             let completionHandler:()->Void = {
                 let settingsNC = self.navigationController as? SettingsNavigationControllerViewController

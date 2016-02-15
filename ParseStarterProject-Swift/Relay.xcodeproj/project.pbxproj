@@ -47,7 +47,11 @@
 		CC5934371BD06E590087A8BD /* ViewControllerSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5934361BD06E590087A8BD /* ViewControllerSignUp.swift */; };
 		CC5934391BD46ABA0087A8BD /* ViewController Log In.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5934381BD46ABA0087A8BD /* ViewController Log In.swift */; };
 		CC59343B1BDDB71B0087A8BD /* ViewController inboxRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59343A1BDDB71B0087A8BD /* ViewController inboxRoot.swift */; };
+		CCD363D61C691BF0004829CC /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCD363D51C691BF0004829CC /* FacebookSDKStrings.bundle */; };
 		CCDABB591C63D6EB00AB5BEA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCDABB581C63D6EB00AB5BEA /* Launch Screen.storyboard */; };
+		CCE143AB1C6FAF03005EB232 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CCE143AA1C6FAF03005EB232 /* profile.png */; };
+		CCE143AD1C6FF4DE005EB232 /* relayContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE143AC1C6FF4DE005EB232 /* relayContentViewController.swift */; };
+		CCE143AF1C728DC8005EB232 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = CCE143AE1C728DC8005EB232 /* camera.png */; };
 		CCEBAF6E1C5055C40057A082 /* picture_library.png in Resources */ = {isa = PBXBuildFile; fileRef = CCEBAF6D1C5055C40057A082 /* picture_library.png */; };
 		CCEBAF701C5311A60057A082 /* RelayContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEBAF6F1C5311A60057A082 /* RelayContainerView.swift */; };
 		CCEBAF721C5316C30057A082 /* SettingsNavigationControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEBAF711C5316C30057A082 /* SettingsNavigationControllerViewController.swift */; };
@@ -102,7 +106,11 @@
 		CC5934361BD06E590087A8BD /* ViewControllerSignUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSignUp.swift; sourceTree = "<group>"; };
 		CC5934381BD46ABA0087A8BD /* ViewController Log In.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController Log In.swift"; sourceTree = "<group>"; };
 		CC59343A1BDDB71B0087A8BD /* ViewController inboxRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ViewController inboxRoot.swift"; path = "../ViewController inboxRoot.swift"; sourceTree = "<group>"; };
+		CCD363D51C691BF0004829CC /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		CCDABB581C63D6EB00AB5BEA /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CCE143AA1C6FAF03005EB232 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
+		CCE143AC1C6FF4DE005EB232 /* relayContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = relayContentViewController.swift; sourceTree = "<group>"; };
+		CCE143AE1C728DC8005EB232 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		CCEBAF6D1C5055C40057A082 /* picture_library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_library.png; sourceTree = "<group>"; };
 		CCEBAF6F1C5311A60057A082 /* RelayContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelayContainerView.swift; sourceTree = "<group>"; };
 		CCEBAF711C5316C30057A082 /* SettingsNavigationControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNavigationControllerViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +151,7 @@
 			children = (
 				814C3AC81B69877600E307BB /* Images.xcassets */,
 				CCDABB581C63D6EB00AB5BEA /* Launch Screen.storyboard */,
+				CCE143AE1C728DC8005EB232 /* camera.png */,
 				CCEBAF791C5ABBCA0057A082 /* gif.png */,
 				CCEBAF7A1C5ABBCA0057A082 /* photo.png */,
 				CCEBAF7B1C5ABBCA0057A082 /* url.png */,
@@ -155,6 +164,7 @@
 				CC1BEA311BF0304F00CDC9CE /* backward4.png */,
 				CCEBAF6D1C5055C40057A082 /* picture_library.png */,
 				814C3AC91B69877600E307BB /* Info.plist */,
+				CCE143AA1C6FAF03005EB232 /* profile.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -186,8 +196,9 @@
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				CC4030DC1C3A3A21004C7B2C /* sectionalTestViewController.swift */,
-				814C3AC61B69877600E307BB /* Main.storyboard */,
 				CCEBAF6F1C5311A60057A082 /* RelayContainerView.swift */,
+				814C3AC61B69877600E307BB /* Main.storyboard */,
+				CCE143AC1C6FF4DE005EB232 /* relayContentViewController.swift */,
 				CC1BEA2F1BE55FB700CDC9CE /* TableViewController.swift */,
 				CC1BEA6E1C190D6F00CDC9CE /* selectContactsForRelay.swift */,
 				CC1BEA371BF6AE1E00CDC9CE /* newMessageViewController.swift */,
@@ -214,6 +225,7 @@
 			children = (
 				CCEBAF761C5748100057A082 /* UIImage+animatedGIF.h */,
 				CCEBAF771C5748100057A082 /* UIImage+animatedGIF.m */,
+				CCD363D51C691BF0004829CC /* FacebookSDKStrings.bundle */,
 				CC4030E61C4AB9E6004C7B2C /* ParseFacebookUtilsV4.framework */,
 				CC4030DE1C49BAFA004C7B2C /* FBSDKCoreKit.framework */,
 				CC4030DF1C49BAFA004C7B2C /* FBSDKLoginKit.framework */,
@@ -310,10 +322,13 @@
 				814C3ACA1B69877600E307BB /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				CC1BEA341BF691F800CDC9CE /* CustomCell.xib in Resources */,
+				CCE143AB1C6FAF03005EB232 /* profile.png in Resources */,
 				CC1BEA3A1BF8048000CDC9CE /* newMessage.png in Resources */,
 				CC1BEA481BFC1F0400CDC9CE /* rightArrow.png in Resources */,
+				CCE143AF1C728DC8005EB232 /* camera.png in Resources */,
 				CCEBAF6E1C5055C40057A082 /* picture_library.png in Resources */,
 				CCEBAF7E1C5ABBCA0057A082 /* url.png in Resources */,
+				CCD363D61C691BF0004829CC /* FacebookSDKStrings.bundle in Resources */,
 				CCEBAF7C1C5ABBCA0057A082 /* gif.png in Resources */,
 				CC1BEA321BF0304F00CDC9CE /* backward4.png in Resources */,
 			);
@@ -348,6 +363,7 @@
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				CC1BEA301BE55FB700CDC9CE /* TableViewController.swift in Sources */,
 				CC1BEA431BFC1D9400CDC9CE /* settingsTableViewController.swift in Sources */,
+				CCE143AD1C6FF4DE005EB232 /* relayContentViewController.swift in Sources */,
 				CC5934371BD06E590087A8BD /* ViewControllerSignUp.swift in Sources */,
 				CC1BEA521C0B926500CDC9CE /* ViewControllerUsernameTest.swift in Sources */,
 				CC1BEA361BF6945100CDC9CE /* CustomCellTableViewCell.swift in Sources */,
@@ -481,6 +497,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Relay-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -503,6 +520,7 @@
 				PRODUCT_NAME = Relay;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Relay-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

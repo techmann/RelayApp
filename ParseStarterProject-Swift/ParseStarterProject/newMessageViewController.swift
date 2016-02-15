@@ -12,6 +12,7 @@ import Parse
 
 var relayText = ""
 var relayContent = ""
+var relayImageData: NSData? = nil
 
 class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -22,6 +23,10 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
     @IBOutlet weak var imageOutlet: UIImageView!
     @IBOutlet weak var relayWebView: UIWebView!
     @IBOutlet weak var chooseContactsBtn: UIButton!
+    @IBOutlet weak var cameraOutlet: UIButton!
+    
+    
+    //let imagePicker = UIImagePickerController()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBAction func pasteBtn(sender: AnyObject) {
@@ -29,6 +34,7 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
         chooseContactsBtn.hidden = false
         pasteBtnOutlet.hidden = true
         pictureLibOutlet.hidden = true
+        cameraOutlet.hidden = true
         
         activityIndicator = UIActivityIndicatorView(frame: CGRectMake(100, 200, 50, 50))
         activityIndicator.center = self.view.center
@@ -63,7 +69,6 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
                 imageOutlet.hidden = false
                 imageOutlet.contentMode = .ScaleAspectFit
                 downloadImage((URL)!)
-                //relayWebView.hidden = true
                 
             } else {
             
@@ -92,7 +97,6 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
     
     
     func checkForPaste() {
-        
         UIPasteboard.generalPasteboard().containsPasteboardTypes(UIPasteboardTypeListString as! [String])
         
         let pasteBoardText = UIPasteboard.generalPasteboard().string
@@ -119,20 +123,63 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
         }
 
     
-    //var libraryPhotoView = UIImageView(frame: <#T##CGRect#>)
-    
     @IBAction func pictureLibraryBtn(sender: AnyObject) {
+        
+        chooseContactsBtn.hidden = false
+        pasteBtnOutlet.hidden = true
+        pictureLibOutlet.hidden = true
+        imageOutlet.hidden = false
+        cameraOutlet.hidden = true
         
         let photoPicker = UIImagePickerController()
         photoPicker.delegate = self
         photoPicker.sourceType = .PhotoLibrary
         self.presentViewController(photoPicker, animated: true, completion: nil)
-        
     }
     
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-//        <#code#>
-//    }
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        if let pickedImage = image as? UIImage {
+            imageOutlet.contentMode = .ScaleAspectFill
+            imageOutlet.image = pickedImage
+            
+            let pickImageSize = UIImagePNGRepresentation(pickedImage)
+            if pickImageSize!.length < 10000000 {
+                relayImageData = pickImageSize
+            } else {
+                relayImageData = pickedImage.highestQualityJPEGNSData
+            }
+            
+        dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        
+        pasteBtnOutlet.hidden = false
+        pictureLibOutlet.hidden = false
+        imageOutlet.hidden = true
+        cameraOutlet.hidden = false
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    @IBAction func cameraBtn(sender: AnyObject) {
+        
+        chooseContactsBtn.hidden = false
+        pasteBtnOutlet.hidden = true
+        pictureLibOutlet.hidden = true
+        imageOutlet.hidden = false
+        cameraOutlet.hidden = true
+        
+        let photoPicker = UIImagePickerController()
+        photoPicker.delegate = self
+        photoPicker.sourceType = .Camera
+        self.presentViewController(photoPicker, animated: true, completion: nil)
+        
+    }
     
 
     @IBAction func chooseContactsButtonPressed(sender: AnyObject) {
@@ -146,10 +193,9 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
     }
     
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.addLeftNavItemOnView()
         self.title = "New Relay"
         
@@ -202,17 +248,15 @@ class newMessageViewController: UIViewController, UITextFieldDelegate, UIImagePi
             }
         }
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+    
+    extension UIImage {
+        var uncompressedPNGData: NSData      { return UIImagePNGRepresentation(self)!        }
+        var highestQualityJPEGNSData: NSData { return UIImageJPEGRepresentation(self, 1.0)!  }
+        var highQualityJPEGNSData: NSData    { return UIImageJPEGRepresentation(self, 0.75)! }
+        var mediumQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.5)!  }
+        var lowQualityJPEGNSData: NSData     { return UIImageJPEGRepresentation(self, 0.25)! }
+        var lowestQualityJPEGNSData:NSData   { return UIImageJPEGRepresentation(self, 0.0)!  }
+}
+
+

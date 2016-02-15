@@ -16,7 +16,7 @@ class selectContactsForRelayCell: PFCollectionViewCell {
     
     var user: PFUser? {
         didSet {
-            friendLabel.text = user?.username
+            friendLabel.text = user?["fullName"] as? String
         }
     }
 }

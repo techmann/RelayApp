@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-
+import ParseUI
 
 
 protocol FriendSearchTableViewCellDelegate: class {
@@ -22,12 +22,24 @@ class searchByUsernameCell: UITableViewCell {
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var usernameTapped: UIButton!
+    @IBOutlet weak var profilePic: PFImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     
     weak var delegate: FriendSearchTableViewCellDelegate?
     
     var user: PFUser? {
         didSet {
             usernameLabel.text = user?.username
+            nameLabel.text = user!["fullName"] as? String
+            profilePic.image = UIImage(named: "placeholder")
+            
+            if let profilePicture = user!["profilePic"] as? PFFile {
+                profilePic.file = profilePicture
+                profilePic.loadInBackground()
+            } else {
+                profilePic.image = UIImage(named: "profile.png")
+            }
         }
     }
     
