@@ -21,34 +21,73 @@ class TableViewController: PFQueryTableViewController {
     var logInController: PFLogInViewController! = PFLogInViewController()
     var signUpController: PFSignUpViewController! = PFSignUpViewController()
     
+    var firstTime : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-            if PFUser.currentUser() == nil {
-                presentParse()
-        }
 
             self.addRightNavItemOnView()
             self.addLeftNavItemOnView()
             self.title = "Inbox"
         
+            let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+            leftSwipe.direction = .Left
+            view.addGestureRecognizer(leftSwipe)
+            self.tableView.addGestureRecognizer(leftSwipe)
+    
         }
     
         required init(coder aDecoder: NSCoder) {
                 super.init(coder: aDecoder)!
-        
-                self.objectsPerPage = 20
+    
+            self.objectsPerPage = 15
         }
-                
-        override func queryForTable() -> PFQuery {
-            
-            let query = PFQuery(className: "relay")
-            query.whereKey("recipient", equalTo: PFUser.currentUser()!)
-            //query.cachePolicy = .CacheElseNetwork
-            query.orderByDescending("createdAt")
 
-            return query
+    
+    override func queryForTable() -> PFQuery {
+        
+            return self.baseQuery().fromLocalDatastore()
+    }
+    
+    func baseQuery() -> PFQuery {
+        
+        let query = PFQuery(className: "relay")
+        query.whereKey("recipient", equalTo: PFUser.currentUser()!)
+        //query.cachePolicy = .CacheElseNetwork
+        query.orderByDescending("createdAt")
+        
+        return query
+        
+    }
+    
+    override func loadObjects() -> BFTask {
+        if firstTime {
+            // Load frome local data store
+            firstTime = false
+            return loadObjects(0, clear: true)
         }
+        
+        return queryForTable().findObjectsInBackground().continueWithBlock({ (task : BFTask!) -> AnyObject! in
+            if task.error != nil { // No object in local data store
+                return nil
+            }
+            if let objects = task.result as? [PFObject] { // Unpin local datastore objects
+                return PFObject.unpinAllInBackground(objects, withName: "cacheString")
+            }
+            return nil
+        }).continueWithSuccessBlock({ (task : BFTask!) -> AnyObject! in
+            // Fetch objects from Parse
+            return self.baseQuery().findObjectsInBackground()
+        }).continueWithSuccessBlock({ (task : BFTask!) -> AnyObject! in
+            if let objects = task.result as? [PFObject] {
+                return PFObject.pinAllInBackground(objects, withName: "cacheString")
+            }
+            return nil
+        }).continueWithSuccessBlock({ (task : BFTask!) -> AnyObject! in
+            return self.loadObjects(0, clear: true)
+        })
+    }
+    
     
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
             
@@ -128,6 +167,23 @@ class TableViewController: PFQueryTableViewController {
         
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let relayAction = UITableViewRowAction(style: .Default, title:"Relay") { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+        }
+        relayAction.backgroundColor = UIColor.blueColor()
+        return [relayAction]
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -137,8 +193,9 @@ class TableViewController: PFQueryTableViewController {
             let relayVC = segue.destinationViewController as! relayContentViewController
             
             let object = self.objectAtIndexPath(indexPath)
-            relayVC.pasteStr = object?.objectForKey("pasteStr") as! String
-            relayVC.imageFile = object?.objectForKey("relayPic") as! PFFile
+            
+            relayVC.pasteStr = object?.objectForKey("pasteStr") as? String
+            relayVC.imageFile = object?.objectForKey("relayPic") as? PFFile
             
             self.tableView.deselectRowAtIndexPath(indexPath!, animated: true)
         }
@@ -208,12 +265,6 @@ class TableViewController: PFQueryTableViewController {
 }
 
 extension TableViewController: PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
         
     func presentParse() {
         

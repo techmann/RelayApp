@@ -9,6 +9,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 import FBSDKCoreKit
 import ParseFacebookUtilsV4
 
@@ -16,7 +17,7 @@ import ParseFacebookUtilsV4
 // import ParseCrashReporting
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
 
     var window: UIWindow?
 
@@ -86,7 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         func applicationDidBecomeActive(application: UIApplication) {
             FBSDKAppEvents.activateApp()
         }
-
 
         //
         //  Swift 1.2
@@ -167,8 +167,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
     //    return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
     //}
-
 }
+
 
 
 

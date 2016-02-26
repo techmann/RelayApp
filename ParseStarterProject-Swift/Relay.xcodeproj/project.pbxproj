@@ -17,6 +17,7 @@
 		81BA81791A49E0DB00E65899 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81781A49E0DB00E65899 /* AudioToolbox.framework */; };
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
+		CC0CEF971C7C0A25001B0778 /* relayChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0CEF961C7C0A25001B0778 /* relayChatViewController.swift */; };
 		CC1BEA301BE55FB700CDC9CE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BEA2F1BE55FB700CDC9CE /* TableViewController.swift */; };
 		CC1BEA321BF0304F00CDC9CE /* backward4.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1BEA311BF0304F00CDC9CE /* backward4.png */; };
 		CC1BEA341BF691F800CDC9CE /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC1BEA331BF691F800CDC9CE /* CustomCell.xib */; };
@@ -32,7 +33,6 @@
 		CC1BEA521C0B926500CDC9CE /* ViewControllerUsernameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BEA511C0B926500CDC9CE /* ViewControllerUsernameTest.swift */; };
 		CC1BEA551C0FB97500CDC9CE /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1BEA531C0FB97500CDC9CE /* add.png */; };
 		CC1BEA561C0FB97500CDC9CE /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1BEA541C0FB97500CDC9CE /* check.png */; };
-		CC1BEA651C0FD8DE00CDC9CE /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC1BEA641C0FD8DE00CDC9CE /* ParseUI.framework */; };
 		CC1BEA671C0FDA1E00CDC9CE /* PFCellSearchByUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BEA661C0FDA1E00CDC9CE /* PFCellSearchByUsername.swift */; };
 		CC1BEA691C1140AC00CDC9CE /* searchByUsernameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BEA681C1140AC00CDC9CE /* searchByUsernameCell.swift */; };
 		CC1BEA6B1C17883B00CDC9CE /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BEA6A1C17883B00CDC9CE /* ParseHelper.swift */; };
@@ -52,8 +52,9 @@
 		CCE143AB1C6FAF03005EB232 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CCE143AA1C6FAF03005EB232 /* profile.png */; };
 		CCE143AD1C6FF4DE005EB232 /* relayContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE143AC1C6FF4DE005EB232 /* relayContentViewController.swift */; };
 		CCE143AF1C728DC8005EB232 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = CCE143AE1C728DC8005EB232 /* camera.png */; };
+		CCE143B41C72B6D7005EB232 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
 		CCEBAF6E1C5055C40057A082 /* picture_library.png in Resources */ = {isa = PBXBuildFile; fileRef = CCEBAF6D1C5055C40057A082 /* picture_library.png */; };
-		CCEBAF701C5311A60057A082 /* RelayContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEBAF6F1C5311A60057A082 /* RelayContainerView.swift */; };
+		CCEBAF701C5311A60057A082 /* ParseErrorHandlingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEBAF6F1C5311A60057A082 /* ParseErrorHandlingController.swift */; };
 		CCEBAF721C5316C30057A082 /* SettingsNavigationControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEBAF711C5316C30057A082 /* SettingsNavigationControllerViewController.swift */; };
 		CCEBAF741C540D6D0057A082 /* paste.png in Resources */ = {isa = PBXBuildFile; fileRef = CCEBAF731C540D6D0057A082 /* paste.png */; };
 		CCEBAF781C5748100057A082 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = CCEBAF771C5748100057A082 /* UIImage+animatedGIF.m */; };
@@ -76,6 +77,7 @@
 		81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		CC0CEF961C7C0A25001B0778 /* relayChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = relayChatViewController.swift; sourceTree = "<group>"; };
 		CC1BEA2F1BE55FB700CDC9CE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewController.swift; path = ../TableViewController.swift; sourceTree = "<group>"; };
 		CC1BEA311BF0304F00CDC9CE /* backward4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward4.png; sourceTree = "<group>"; };
 		CC1BEA331BF691F800CDC9CE /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
@@ -91,7 +93,6 @@
 		CC1BEA511C0B926500CDC9CE /* ViewControllerUsernameTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUsernameTest.swift; sourceTree = "<group>"; };
 		CC1BEA531C0FB97500CDC9CE /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = ../ParseStarterProject/add.png; sourceTree = "<group>"; };
 		CC1BEA541C0FB97500CDC9CE /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = ../ParseStarterProject/check.png; sourceTree = "<group>"; };
-		CC1BEA641C0FD8DE00CDC9CE /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		CC1BEA661C0FDA1E00CDC9CE /* PFCellSearchByUsername.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PFCellSearchByUsername.swift; path = ../PFCellSearchByUsername.swift; sourceTree = "<group>"; };
 		CC1BEA681C1140AC00CDC9CE /* searchByUsernameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchByUsernameCell.swift; sourceTree = "<group>"; };
 		CC1BEA6A1C17883B00CDC9CE /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
@@ -111,8 +112,10 @@
 		CCE143AA1C6FAF03005EB232 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		CCE143AC1C6FF4DE005EB232 /* relayContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = relayContentViewController.swift; sourceTree = "<group>"; };
 		CCE143AE1C728DC8005EB232 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		CCE143B01C72B6AC005EB232 /* xcshareddata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xcshareddata; path = Relay.xcodeproj/xcshareddata; sourceTree = "<group>"; };
+		CCE143B21C72B6BF005EB232 /* parse-starter-project-1.9.0 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "parse-starter-project-1.9.0"; path = ..; sourceTree = "<group>"; };
 		CCEBAF6D1C5055C40057A082 /* picture_library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = picture_library.png; sourceTree = "<group>"; };
-		CCEBAF6F1C5311A60057A082 /* RelayContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelayContainerView.swift; sourceTree = "<group>"; };
+		CCEBAF6F1C5311A60057A082 /* ParseErrorHandlingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseErrorHandlingController.swift; sourceTree = "<group>"; };
 		CCEBAF711C5316C30057A082 /* SettingsNavigationControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNavigationControllerViewController.swift; sourceTree = "<group>"; };
 		CCEBAF731C540D6D0057A082 /* paste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paste.png; sourceTree = "<group>"; };
 		CCEBAF751C57480F0057A082 /* Relay-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Relay-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */,
+				CCE143B41C72B6D7005EB232 /* ParseUI.framework in Frameworks */,
 				81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */,
 				CC4030E71C4AB9E6004C7B2C /* ParseFacebookUtilsV4.framework in Frameworks */,
 				CC4030E41C49BAFA004C7B2C /* FBSDKMessengerShareKit.framework in Frameworks */,
@@ -138,7 +142,6 @@
 				CC4030E51C49BAFA004C7B2C /* FBSDKShareKit.framework in Frameworks */,
 				81BA81711A49DB6800E65899 /* Parse.framework in Frameworks */,
 				CC4030E21C49BAFA004C7B2C /* FBSDKCoreKit.framework in Frameworks */,
-				CC1BEA651C0FD8DE00CDC9CE /* ParseUI.framework in Frameworks */,
 				81BA81701A49DB6800E65899 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,7 +175,6 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
-				CC1BEA641C0FD8DE00CDC9CE /* ParseUI.framework */,
 				81BA81471A49DA1800E65899 /* Relay-Build */,
 				814C3AC51B69877600E307BB /* Resources */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
@@ -196,8 +198,9 @@
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				CC4030DC1C3A3A21004C7B2C /* sectionalTestViewController.swift */,
-				CCEBAF6F1C5311A60057A082 /* RelayContainerView.swift */,
+				CCEBAF6F1C5311A60057A082 /* ParseErrorHandlingController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
+				CC0CEF961C7C0A25001B0778 /* relayChatViewController.swift */,
 				CCE143AC1C6FF4DE005EB232 /* relayContentViewController.swift */,
 				CC1BEA2F1BE55FB700CDC9CE /* TableViewController.swift */,
 				CC1BEA6E1C190D6F00CDC9CE /* selectContactsForRelay.swift */,
@@ -223,6 +226,8 @@
 		81BA816A1A49DB5600E65899 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CCE143B21C72B6BF005EB232 /* parse-starter-project-1.9.0 */,
+				CCE143B01C72B6AC005EB232 /* xcshareddata */,
 				CCEBAF761C5748100057A082 /* UIImage+animatedGIF.h */,
 				CCEBAF771C5748100057A082 /* UIImage+animatedGIF.m */,
 				CCD363D51C691BF0004829CC /* FacebookSDKStrings.bundle */,
@@ -358,7 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCEBAF701C5311A60057A082 /* RelayContainerView.swift in Sources */,
+				CCEBAF701C5311A60057A082 /* ParseErrorHandlingController.swift in Sources */,
 				CC1BEA691C1140AC00CDC9CE /* searchByUsernameCell.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				CC1BEA301BE55FB700CDC9CE /* TableViewController.swift in Sources */,
@@ -376,6 +381,7 @@
 				CC1BEA4A1BFC214400CDC9CE /* settingsCellTableViewCell.swift in Sources */,
 				CC5934391BD46ABA0087A8BD /* ViewController Log In.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
+				CC0CEF971C7C0A25001B0778 /* relayChatViewController.swift in Sources */,
 				CC1BEA711C192BB000CDC9CE /* selectContactsForRelayCell.swift in Sources */,
 				CC1BEA381BF6AE1E00CDC9CE /* newMessageViewController.swift in Sources */,
 				CC1BEA6B1C17883B00CDC9CE /* ParseHelper.swift in Sources */,

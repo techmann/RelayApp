@@ -9,11 +9,14 @@
 import UIKit
 import Parse
 
-class relayContentViewController: UIViewController, UIScrollViewDelegate {
+class relayContentViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webPage: UIWebView!
+    
+    
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var pasteStr: String!
     var imageFile: PFFile!
@@ -22,7 +25,8 @@ class relayContentViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         imageView.hidden = true
-        webView.hidden = true
+        webPage.hidden = true
+        activityInd.hidden = true
         
         if pasteStr != "" {
         
@@ -45,9 +49,9 @@ class relayContentViewController: UIViewController, UIScrollViewDelegate {
                     
             } else {
                 
-                webView.hidden = false
+                webPage.hidden = false
                 let request = NSURLRequest(URL: URL!)
-                webView.loadRequest(request)
+                webPage.loadRequest(request)
             }
         }
         
@@ -93,6 +97,16 @@ class relayContentViewController: UIViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        activityInd.hidden = false
+        activityInd.startAnimating()
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        activityInd.hidden = true
+        activityInd.stopAnimating()
     }
     
 
